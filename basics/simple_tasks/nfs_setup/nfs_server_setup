@@ -1,0 +1,16 @@
+
+task
+-----
+packages = nfs-server nfs-utils
+create_folder -- mkdir {foldername}
+chown ----   chown nfsnobody:nfsnobody {foldername}
+config = /etc/export ----- /{foldername}   {clientaddress}(rw,no_root_squash)
+firewalld ---- service=nfs
+service--- nfs-server start & enable 
+command ---- exportfs -r
+check the output: error or not
+config2 = /etc/fstab ---- {nfs-serveraddress}:/{sharename} nfs defaults 0 0
+command2-- mount -a
+check output & lsblk
+
+
